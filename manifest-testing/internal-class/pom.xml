@@ -10,9 +10,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <packaging>bundle</packaging>
-    <artifactId>defaults</artifactId>
+    <artifactId>internal-class</artifactId>
 
-    <name>OSGi Sandbox :: Manifest Testing :: Defaults</name>
+    <name>OSGi Sandbox :: Manifest Testing :: Internal Class</name>
 
     <dependencies>
         <dependency>
