@@ -18,6 +18,7 @@
         <module>commons</module>
         <module>defaults</module>
         <module>custom-import</module>
+        <module>custom-export</module>
         <module>impl-class</module>
         <module>internal-class</module>
     </modules>
