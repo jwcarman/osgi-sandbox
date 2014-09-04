@@ -74,6 +74,11 @@
                         <Import-Package>${osgi.import}</Import-Package>
                         <Export-Package>${osgi.export}</Export-Package>
                     </instructions>
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                        <supportedProjectType>war</supportedProjectType>
+                        <supportedProjectType>bundle</supportedProjectType>
+                    </supportedProjectTypes>
                 </configuration>
                 <executions>
                     <execution>
