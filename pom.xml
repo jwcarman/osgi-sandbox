@@ -33,6 +33,10 @@
         -->
         <osgi.export>{local-packages}</osgi.export>
         <osgi.import>*</osgi.import>
+        <osgi.embed/>
+        <osgi.activator/>
+        <osgi.private/>
+        <osgi.context/>
     </properties>
 
     <dependencies>
@@ -65,14 +69,34 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.5.0</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <niceManifest>true</niceManifest>
                     <instructions>
                         <Import-Package>${osgi.import}</Import-Package>
                         <Export-Package>${osgi.export}</Export-Package>
+                        <Webapp-Context>${osgi.context}</Webapp-Context>
+                        <Build-Time>${maven.build.timestamp}</Build-Time>
+                        <Specification-Title>${project.name}</Specification-Title>
+                        <Specification-Version>${project.version}</Specification-Version>
+                        <Specification-Vendor>${project.organization.name}</Specification-Vendor>
+                        <Implementation-Title>${project.name}</Implementation-Title>
+                        <Implementation-Version>${project.version}</Implementation-Version>
+                        <Implementation-Vendor-Id>${project.groupId}</Implementation-Vendor-Id>
+                        <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                     </instructions>
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>

@@ -16,6 +16,7 @@
 
     <modules>
         <module>webapp</module>
+        <module>features</module>
         <module>testing</module>
     </modules>
 </project>

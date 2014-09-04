@@ -13,7 +13,9 @@
     <artifactId>commons</artifactId>
 
     <name>OSGi Sandbox :: Manifest Testing :: Commons</name>
-
+    <!--<properties>-->
+        <!--<osgi.export>com.carmanconsulting.sandbox.osgi.manifest.commons.*;-split-package:=merge-last</osgi.export>-->
+    <!--</properties>-->
     <dependencies>
         <dependency>
             <groupId>commons-io</groupId>

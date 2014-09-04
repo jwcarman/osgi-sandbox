@@ -1,0 +1,10 @@
+<features name="com.cengage.cxp-${project.version}">
+
+    <feature name="osgi-webapp" version="${project.version}">
+        <feature>war</feature>
+
+        <bundle>mvn:com.carmanconsulting.sandbox.osgi/webapp/${project.version}/war</bundle>
+    </feature>
+
+
+</features>

@@ -11,7 +11,6 @@ import org.ops4j.pax.exam.ProbeBuilder;
 import org.ops4j.pax.exam.TestProbeBuilder;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.karaf.options.KarafDistributionConfigurationFileExtendOption;
-import org.ops4j.pax.exam.karaf.options.KarafDistributionConfigurationFileOption;
 import org.ops4j.pax.exam.karaf.options.KarafDistributionConfigurationFilePutOption;
 import org.ops4j.pax.exam.karaf.options.LogLevelOption;
 import org.osgi.framework.Constants;
@@ -57,8 +56,17 @@ public class OsgiWebappDeploymentTest extends Assert {
 //----------------------------------------------------------------------------------------------------------------------
 
     protected void assertBundleActive(String symbolicName) {
-        String listOutput = executeCommand(String.format("osgi:list -t 10 | grep '%s' | grep 'Active'", symbolicName));
-        assertFalse("Feature " + symbolicName + " is not installed!", listOutput == null || listOutput.isEmpty());
+        String output = executeCommand(String.format("osgi:list -t 10 | grep '%s' | grep 'Active'", symbolicName));
+        assertFalse("Feature " + symbolicName + " is not installed!", isEmpty(output));
+    }
+
+    protected void assertWebappDeployed(String symbolicName) {
+        final String output = executeCommand("web:list | grep '\\[Deployed'");
+        assertFalse("Webapp " + symbolicName + " not deployed!", isEmpty(output));
+    }
+
+    private boolean isEmpty(String output) {
+        return output == null || output.isEmpty();
     }
 
     @Configuration
@@ -79,14 +87,11 @@ public class OsgiWebappDeploymentTest extends Assert {
                 new KarafDistributionConfigurationFilePutOption(PAX_URL_MVN_CONFIG, "org.ops4j.pax.url.mvn.disableAether", "true"),
                 new KarafDistributionConfigurationFilePutOption(PAX_URL_MVN_CONFIG, "org.ops4j.pax.url.mvn.defaultRepositories", "file:${karaf.home}/${karaf.default.repository}@snapshots@id=karaf.${karaf.default.repository}"),
                 new KarafDistributionConfigurationFilePutOption(PAX_URL_MVN_CONFIG, "org.ops4j.pax.url.mvn.repositories", "http://repo1.maven.org/maven2@id=central"),
-
+                new KarafDistributionConfigurationFileExtendOption(FEATURES_CONFIG, "featuresRepositories", "mvn:com.carmanconsulting.sandbox.osgi/features/1.0-SNAPSHOT/xml/features"),
 
                 new KarafDistributionConfigurationFilePutOption(PAX_EXAM_RBC_CONFIG, "org.ops4j.pax.exam.rbc.rmi.host", "127.0.0.1"),
 
-                new KarafDistributionConfigurationFilePutOption(FEATURES_CONFIG, "featuresBoot", "config,ssh,management,kar,obr,war"),
-
-                //mavenWar("com.carmanconsulting.sandbox.osgi","webapp", "1.0-SNAPSHOT"),
-                mavenBundle().groupId("com.carmanconsulting.sandbox.osgizzz").artifactId("webapp").type("war").version("1.0-SNAPSHOT"),
+                new KarafDistributionConfigurationFilePutOption(FEATURES_CONFIG, "featuresBoot", "config,ssh,management,kar,war,osgi-webapp"),
 
                 keepRuntimeFolder(),
 
@@ -114,22 +119,21 @@ public class OsgiWebappDeploymentTest extends Assert {
      */
     protected String executeCommand(final String command, final Long timeout) {
         String response;
-        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        final PrintStream printStream = new PrintStream(byteArrayOutputStream);
-        final CommandSession commandSession = commandProcessor.createSession(System.in, printStream, System.err);
+
         FutureTask<String> commandFuture = new FutureTask<>(new Callable<String>() {
             public String call() {
                 try {
-                    logger.info("Executing command {}...", command);
+                    final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    final PrintStream printStream = new PrintStream(byteArrayOutputStream, false, "UTF-8");
+                    final CommandSession commandSession = commandProcessor.createSession(System.in, printStream, System.err);
                     commandSession.execute(command);
+                    printStream.flush();
+                    return byteArrayOutputStream.toString("UTF-8");
                 } catch (Exception e) {
                     logger.error("Command threw exception!", e);
                     throw new RuntimeException(e);
                 }
-                printStream.flush();
-                final String output = byteArrayOutputStream.toString();
-                logger.info("Command {} output\n{}", command, output);
-                return output;
+
             }
         });
 
@@ -147,13 +151,17 @@ public class OsgiWebappDeploymentTest extends Assert {
     @ProbeBuilder
     public TestProbeBuilder probeConfiguration(TestProbeBuilder probe) {
         probe.setHeader(Constants.DYNAMICIMPORT_PACKAGE, "*,org.apache.felix.service.*;status=provisional");
-
         return probe;
+    }
+
+    protected void echoOutput(String command) {
+        final String output = executeCommand(command);
+        logger.info("Output for command [{}]:\n\n{}", command, output);
     }
 
     @Test
     public void test() {
-        logger.info(executeCommand("osgi:list -t 10"));
-        assertBundleActive("OSGi Sandbox :: Webapp Deployment :: Webapp");
+        echoOutput("web:list");
+        assertWebappDeployed("OSGi Sandbox :: Webapp Deployment :: Webapp");
     }
 }
