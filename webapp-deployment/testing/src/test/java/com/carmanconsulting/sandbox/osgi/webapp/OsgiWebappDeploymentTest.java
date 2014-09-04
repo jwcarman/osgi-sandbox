@@ -72,12 +72,19 @@ public class OsgiWebappDeploymentTest extends Assert {
     @Configuration
     public Option[] config() {
         return options(
-
+                // Use Aetos...
                 karafDistributionConfiguration()
                         .frameworkUrl(maven().groupId("com.savoirtech.aetos").artifactId("aetos").type("tar.gz").version("1.5.6"))
                         .karafVersion("2.3.6")
                         .name("Aetos")
                         .unpackDirectory(new File("target/exam")),
+
+                // Use Karaf...
+//                karafDistributionConfiguration()
+//                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("2.3.6").type("tar.gz"))
+//                        .karafVersion("2.3.6")
+//                        .useDeployFolder(false)
+//                        .unpackDirectory(new File("target/exam")),
 
                 new KarafDistributionConfigurationFilePutOption(KARAF_MANAGEMENT_CONFIG, "rmiRegistryHost", "127.0.0.1"),
                 new KarafDistributionConfigurationFilePutOption(KARAF_MANAGEMENT_CONFIG, "rmiServerPort", "44445"),
