@@ -6,20 +6,13 @@
 
     <parent>
         <groupId>com.carmanconsulting.sandbox.osgi</groupId>
-        <artifactId>osgi-sandbox</artifactId>
+        <artifactId>webapp-deployment</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>manifest-testing</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>webapp</artifactId>
+    <packaging>war</packaging>
 
-    <name>OSGi Sandbox :: Manifest Testing</name>
+    <name>OSGi Sandbox :: Webapp Deployment :: Webapp</name>
 
-    <modules>
-        <module>commons</module>
-        <module>defaults</module>
-        <module>custom-import</module>
-        <module>custom-export</module>
-        <module>impl-class</module>
-        <module>internal-class</module>
-    </modules>
+
 </project>

@@ -18,6 +18,7 @@
 
     <modules>
         <module>manifest-testing</module>
+        <module>webapp-deployment</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +27,12 @@
         <maven.compiler.target>1.7</maven.compiler.target>
 
         <slf4j.version>1.7.5</slf4j.version>
+
+        <!--
+        OSGi bundle properties
+        -->
+        <osgi.export>{local-packages}</osgi.export>
+        <osgi.import>*</osgi.import>
     </properties>
 
     <dependencies>
@@ -54,5 +61,31 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.5.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>${osgi.import}</Import-Package>
+                        <Export-Package>${osgi.export}</Export-Package>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>bundle</id>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
