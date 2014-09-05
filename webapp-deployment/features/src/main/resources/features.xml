@@ -1,4 +1,4 @@
-<features name="com.cengage.cxp-${project.version}">
+<features name="com.carmanconsulting.sandbox.osgi-webapp-${project.version}">
 
     <feature name="osgi-webapp" version="${project.version}">
         <feature>war</feature>
