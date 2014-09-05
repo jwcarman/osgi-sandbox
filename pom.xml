@@ -31,11 +31,10 @@
         <!--
         OSGi bundle properties
         -->
-        <osgi.export>{local-packages}</osgi.export>
+        <osgi.export>{local-packages};-split-package:=error</osgi.export>
         <osgi.import>*</osgi.import>
         <osgi.embed/>
         <osgi.activator/>
-        <osgi.private/>
         <osgi.context/>
     </properties>
 
@@ -70,6 +69,42 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.1</version>
+                <configuration>
+                    <deployAtEnd>true</deployAtEnd>
+                    <retryFailedDeploymentCount>3</retryFailedDeploymentCount>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
@@ -78,6 +113,21 @@
                     </archive>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.17</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -89,6 +139,8 @@
                         <Import-Package>${osgi.import}</Import-Package>
                         <Export-Package>${osgi.export}</Export-Package>
                         <Webapp-Context>${osgi.context}</Webapp-Context>
+                        <Embed-Dependency>${osgi.embed}</Embed-Dependency>
+                        <Bundle-Activator>${osgi.activator}</Bundle-Activator>
                         <Build-Time>${maven.build.timestamp}</Build-Time>
                         <Specification-Title>${project.name}</Specification-Title>
                         <Specification-Version>${project.version}</Specification-Version>

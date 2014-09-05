@@ -31,7 +31,7 @@ import static org.ops4j.pax.exam.CoreOptions.*;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
 @RunWith(PaxExam.class)
-public class OsgiWebappDeploymentTest extends Assert {
+public class OsgiWebappDeploymentIT extends Assert {
 //----------------------------------------------------------------------------------------------------------------------
 // Fields
 //----------------------------------------------------------------------------------------------------------------------
