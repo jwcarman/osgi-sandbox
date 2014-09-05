@@ -73,16 +73,22 @@ public class OsgiWebappDeploymentTest extends Assert {
     public Option[] config() {
         return options(
                 // Use Aetos...
+//                karafDistributionConfiguration()
+//                        .frameworkUrl(maven().groupId("com.savoirtech.aetos").artifactId("aetos").type("tar.gz").version("1.5.6"))
+//                        .karafVersion("2.3.6")
+//                        .name("Aetos")
+//                        .unpackDirectory(new File("target/exam")),
+
+                // Use Karaf 2.3.6...
                 karafDistributionConfiguration()
-                        .frameworkUrl(maven().groupId("com.savoirtech.aetos").artifactId("aetos").type("tar.gz").version("1.5.6"))
+                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("2.3.6").type("tar.gz"))
                         .karafVersion("2.3.6")
-                        .name("Aetos")
+                        .useDeployFolder(false)
                         .unpackDirectory(new File("target/exam")),
 
-                // Use Karaf...
+                // Use Karaf 3.0.1...
 //                karafDistributionConfiguration()
-//                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("2.3.6").type("tar.gz"))
-//                        .karafVersion("2.3.6")
+//                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("3.0.1").type("tar.gz"))
 //                        .useDeployFolder(false)
 //                        .unpackDirectory(new File("target/exam")),
 
