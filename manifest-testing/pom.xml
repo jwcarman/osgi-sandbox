@@ -21,5 +21,6 @@
         <module>custom-export</module>
         <module>impl-class</module>
         <module>internal-class</module>
+        <module>activator</module>
     </modules>
 </project>
