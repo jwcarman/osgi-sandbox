@@ -2,11 +2,11 @@
 
     <camelContext xmlns="http://camel.apache.org/schema/blueprint">
         <route>
-            <from uri="timer:test" />
+            <from uri="timer:hello" />
             <setBody>
-                <constant>Hello, OSGi!</constant>
+                <constant>Hello, OSGi Blueprint!</constant>
             </setBody>
-            <to uri="log:test" />
+            <to uri="log:hello" />
         </route>
     </camelContext>
 
