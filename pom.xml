@@ -138,7 +138,7 @@
                     <instructions>
                         <Import-Package>${osgi.import}</Import-Package>
                         <Export-Package>${osgi.export}</Export-Package>
-                        <Webapp-Context>${osgi.context}</Webapp-Context>
+                        <Web-ContextPath>${osgi.context}</Web-ContextPath>
                         <Embed-Dependency>${osgi.embed}</Embed-Dependency>
                         <Bundle-Activator>${osgi.activator}</Bundle-Activator>
                         <Build-Time>${maven.build.timestamp}</Build-Time>
