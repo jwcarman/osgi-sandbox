@@ -19,6 +19,7 @@
     <modules>
         <module>manifest-testing</module>
         <module>webapp-deployment</module>
+        <module>camel</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,6 +37,7 @@
         <osgi.embed/>
         <osgi.activator/>
         <osgi.context/>
+        <osgi.dynamic/>
     </properties>
 
     <dependencies>
@@ -140,6 +142,7 @@
                         <Export-Package>${osgi.export}</Export-Package>
                         <Web-ContextPath>${osgi.context}</Web-ContextPath>
                         <Embed-Dependency>${osgi.embed}</Embed-Dependency>
+                        <DynamicImport-Package>${osgi.dynamic}</DynamicImport-Package>
                         <Bundle-Activator>${osgi.activator}</Bundle-Activator>
                         <Build-Time>${maven.build.timestamp}</Build-Time>
                         <Specification-Title>${project.name}</Specification-Title>

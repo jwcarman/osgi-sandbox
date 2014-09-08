@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.carmanconsulting.sandbox.osgi</groupId>
+        <artifactId>camel-osgi</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <packaging>bundle</packaging>
+    <artifactId>blueprint-only</artifactId>
+
+    <name>OSGi Sandbox :: Camel OSGi :: Blueprint Only</name>
+    <!--<properties>-->
+        <!--<osgi.dynamic>*</osgi.dynamic>-->
+    <!--</properties>-->
+
+</project>
