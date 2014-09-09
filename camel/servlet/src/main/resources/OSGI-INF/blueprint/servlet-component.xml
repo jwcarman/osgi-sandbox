@@ -1,0 +1,38 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+    <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
+
+    <!--
+    Expose the CamelHttpTransportServlet as an OSGi service...
+    -->
+    <service ref="camelServlet">
+        <interfaces>
+            <value>javax.servlet.Servlet</value>
+        </interfaces>
+        <service-properties>
+            <entry key="alias" value="/hello" />
+            <entry key="matchOnUriPrefix" value="true" />
+            <entry key="servlet-name" value="camelServlet"/>
+        </service-properties>
+    </service>
+
+    <!--
+    Bind ServletComponent to the CamelHttpTransportServlet instance...
+    -->
+    <bean id="servlet" class="org.apache.camel.component.servlet.ServletComponent">
+        <property name="servletName" value="camelServlet" />
+    </bean>
+
+    <camel:camelContext id="servlet-component">
+        <camel:route>
+            <camel:from uri="servlet:///camel"/>
+            <camel:setBody>
+                <camel:constant>Hello, Camel!</camel:constant>
+            </camel:setBody>
+            <camel:to uri="log:hello"/>
+        </camel:route>
+    </camel:camelContext>
+
+</blueprint>

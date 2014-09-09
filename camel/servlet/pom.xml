@@ -6,19 +6,12 @@
 
     <parent>
         <groupId>com.carmanconsulting.sandbox.osgi</groupId>
-        <artifactId>osgi-sandbox</artifactId>
+        <artifactId>camel-osgi</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>camel-osgi</artifactId>
-    <packaging>pom</packaging>
+    <packaging>bundle</packaging>
+    <artifactId>servlet-component</artifactId>
 
-    <name>OSGi Sandbox :: Camel OSGi :: Parent</name>
+    <name>OSGi Sandbox :: Camel OSGi :: Servlet Component</name>
 
-    <properties>
-        <camel.version>2.13.2</camel.version>
-    </properties>
-    <modules>
-        <module>hello-blueprint</module>
-        <module>servlet</module>
-    </modules>
 </project>
