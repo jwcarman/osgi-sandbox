@@ -4,9 +4,9 @@ osgi.export={local-packages},org.apache.commons.lang3
 ### Manifest File Contents
 <pre>
 Manifest-Version: 1.0
-Bnd-LastModified: 1410490768795
+Bnd-LastModified: 1410491324975
 Build-Jdk: 1.7.0_67
-Build-Time: 20140911-2259
+Build-Time: 20140911-2308
 Built-By: jcarman
 Bundle-DocURL: http://www.carmanconsulting.com
 Bundle-ManifestVersion: 2
@@ -19,24 +19,17 @@ Embed-Directory: lib
 Export-Package: 
  com.carmanconsulting.sandbox.osgi.manifest;version="1.0.0",
  org.apache.commons.lang3;version="3.1";uses:="org.apache.commons.lang3.
- text.translate",
- org.apache.commons.lang3.builder;version="3.1",
- org.apache.commons.lang3.concurrent;version="3.1";uses:="org.apache.com
- mons.lang3.builder",
- org.apache.commons.lang3.event;version="3.1",
- org.apache.commons.lang3.exception;version="3.1";uses:="org.apache.comm
- ons.lang3.tuple",
- org.apache.commons.lang3.math;version="3.1",
- org.apache.commons.lang3.mutable;version="3.1",
- org.apache.commons.lang3.reflect;version="3.1",
- org.apache.commons.lang3.text;version="3.1",
- org.apache.commons.lang3.text.translate;version="3.1",
- org.apache.commons.lang3.time;version="3.1",
- org.apache.commons.lang3.tuple;version="3.1"
+ text.translate"
 Implementation-Title: OSGi Sandbox :: Manifest Testing :: Export Package
 Implementation-Vendor: Carman Consulting, Inc.
 Implementation-Vendor-Id: com.carmanconsulting.sandbox.osgi
 Implementation-Version: 1.0-SNAPSHOT
+Import-Package: 
+ org.apache.commons.lang3.builder;version="[3.1,4)",
+ org.apache.commons.lang3.exception;version="[3.1,4)",
+ org.apache.commons.lang3.math;version="[3.1,4)",
+ org.apache.commons.lang3.mutable;version="[3.1,4)",
+ org.apache.commons.lang3.text.translate;version="[3.1,4)"
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
 Specification-Title: OSGi Sandbox :: Manifest Testing :: Export Package
 Specification-Vendor: Carman Consulting, Inc.
