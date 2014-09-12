@@ -19,6 +19,7 @@
         <module>defaults</module>
         <module>import</module>
         <module>export</module>
+        <module>private</module>
         <module>embed</module>
     </modules>
 </project>

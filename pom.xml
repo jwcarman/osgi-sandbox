@@ -36,6 +36,7 @@
         -->
         <osgi.export>{local-packages};-split-package:=error</osgi.export>
         <osgi.import>*</osgi.import>
+        <osgi.private>{local-packages}</osgi.private>
         <osgi.embed/>
         <osgi.embed.dir>lib</osgi.embed.dir>
         <osgi.activator/>
@@ -165,6 +166,7 @@
                     <instructions>
                         <Import-Package>${osgi.import}</Import-Package>
                         <Export-Package>${osgi.export}</Export-Package>
+                        <Private-Package>${osgi.private}</Private-Package>
                         <Web-ContextPath>${osgi.context}</Web-ContextPath>
                         <Embed-Dependency>${osgi.embed}</Embed-Dependency>
                         <Embed-Directory>${osgi.embed.dir}</Embed-Directory>
