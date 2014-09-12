@@ -86,12 +86,6 @@ public class OsgiWebappDeploymentIT extends Assert {
                         .useDeployFolder(false)
                         .unpackDirectory(new File("target/exam")),
 
-                // Use Karaf 3.0.1...
-//                karafDistributionConfiguration()
-//                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("3.0.1").type("tar.gz"))
-//                        .useDeployFolder(false)
-//                        .unpackDirectory(new File("target/exam")),
-
                 new KarafDistributionConfigurationFilePutOption(KARAF_MANAGEMENT_CONFIG, "rmiRegistryHost", "127.0.0.1"),
                 new KarafDistributionConfigurationFilePutOption(KARAF_MANAGEMENT_CONFIG, "rmiServerPort", "44445"),
                 new KarafDistributionConfigurationFilePutOption(KARAF_MANAGEMENT_CONFIG, "rmiServerHost", "127.0.0.1"),
@@ -111,25 +105,10 @@ public class OsgiWebappDeploymentIT extends Assert {
                 logLevel(LogLevelOption.LogLevel.INFO));
     }
 
-    /**
-     * Executes a shell command and returns output as a String.
-     * Commands have a default timeout of 10 seconds.
-     *
-     * @param command the command
-     * @return the command output
-     */
     protected String executeCommand(final String command) {
         return executeCommand(command, COMMAND_TIMEOUT);
     }
 
-    /**
-     * Executes a shell command and returns output as a String.
-     * Commands have a default timeout of 10 seconds.
-     *
-     * @param command The command to execute.
-     * @param timeout The amount of time in millis to wait for the command to execute.
-     * @return command output
-     */
     protected String executeCommand(final String command, final Long timeout) {
         String response;
 

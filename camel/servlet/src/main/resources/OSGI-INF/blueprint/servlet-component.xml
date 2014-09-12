@@ -31,7 +31,7 @@
             <camel:setBody>
                 <camel:constant>Hello, Camel!</camel:constant>
             </camel:setBody>
-            <camel:to uri="log:hello"/>
+            <camel:to uri="log:hello?showAll=true&amp;multiline=true&amp;level=INFO"/>
         </camel:route>
     </camel:camelContext>
 

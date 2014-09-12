@@ -15,12 +15,10 @@
     <name>OSGi Sandbox :: Manifest Testing</name>
 
     <modules>
-        <module>commons</module>
-        <module>defaults</module>
-        <module>custom-import</module>
-        <module>custom-export</module>
-        <module>impl-class</module>
-        <module>internal-class</module>
         <module>activator</module>
+        <module>defaults</module>
+        <module>import</module>
+        <module>export</module>
+        <module>embed</module>
     </modules>
 </project>

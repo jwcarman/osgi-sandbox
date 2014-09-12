@@ -10,12 +10,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <packaging>bundle</packaging>
-    <artifactId>bundle-activator</artifactId>
+    <artifactId>export-package</artifactId>
 
-    <name>OSGi Sandbox :: Manifest Testing :: Bundle Activator</name>
+    <name>OSGi Sandbox :: Manifest Testing :: Export Package</name>
 
     <properties>
-        <osgi.activator>com.carmanconsulting.sandbox.osgi.activator.MyActivator</osgi.activator>
+        <osgi.export>{local-packages},org.apache.commons.lang3</osgi.export>
     </properties>
 
     <build>
@@ -26,5 +26,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

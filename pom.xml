@@ -28,6 +28,7 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
 
+        <osgi.version>4.3.1</osgi.version>
         <slf4j.version>1.7.5</slf4j.version>
 
         <!--
@@ -36,12 +37,29 @@
         <osgi.export>{local-packages};-split-package:=error</osgi.export>
         <osgi.import>*</osgi.import>
         <osgi.embed/>
+        <osgi.embed.dir>lib</osgi.embed.dir>
         <osgi.activator/>
         <osgi.context/>
         <osgi.dynamic/>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>${osgi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>${osgi.version}</version>
+        </dependency>
+
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -123,8 +141,14 @@
                 <version>2.17</version>
                 <executions>
                     <execution>
+                        <id>integration-test</id>
                         <goals>
                             <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
                             <goal>verify</goal>
                         </goals>
                     </execution>
@@ -143,6 +167,7 @@
                         <Export-Package>${osgi.export}</Export-Package>
                         <Web-ContextPath>${osgi.context}</Web-ContextPath>
                         <Embed-Dependency>${osgi.embed}</Embed-Dependency>
+                        <Embed-Directory>${osgi.embed.dir}</Embed-Directory>
                         <DynamicImport-Package>${osgi.dynamic}</DynamicImport-Package>
                         <Bundle-Activator>${osgi.activator}</Bundle-Activator>
                         <Build-Time>${maven.build.timestamp}</Build-Time>
@@ -170,7 +195,46 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.7</version>
+                    <configuration>
+                        <target>
+                            <echo message="--------------------------------------------------"/>
+                            <echo message="Manifest File Contents"/>
+                            <echo message="--------------------------------------------------"/>
+                            <echo message="${line.separator}"/>
+                            <exec executable="cat">
+                                <arg value="${project.build.outputDirectory}/META-INF/MANIFEST.MF"/>
+                            </exec>
+                            <echo message="${line.separator}"/>
+                            <echo message="--------------------------------------------------"/>
+                            <echo message="Jar File Contents"/>
+                            <echo message="--------------------------------------------------"/>
+                            <echo message="${line.separator}"/>
+                            <exec executable="jar">
+                                <arg value="-tf"/>
+                                <arg value="${project.basedir}/target/${project.build.finalName}.jar"/>
+                            </exec>
+                            <echo message="${line.separator}"/>
+                        </target>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>

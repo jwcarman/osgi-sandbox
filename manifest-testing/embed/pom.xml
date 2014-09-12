@@ -10,12 +10,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <packaging>bundle</packaging>
-    <artifactId>bundle-activator</artifactId>
+    <artifactId>embed-dependency</artifactId>
 
-    <name>OSGi Sandbox :: Manifest Testing :: Bundle Activator</name>
+    <name>OSGi Sandbox :: Manifest Testing :: Embed Dependency</name>
 
     <properties>
-        <osgi.activator>com.carmanconsulting.sandbox.osgi.activator.MyActivator</osgi.activator>
+        <osgi.embed>commons-lang3</osgi.embed>
     </properties>
 
     <build>
