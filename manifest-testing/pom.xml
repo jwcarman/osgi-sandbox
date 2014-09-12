@@ -15,8 +15,9 @@
     <name>OSGi Sandbox :: Manifest Testing</name>
 
     <modules>
-        <module>activator</module>
         <module>defaults</module>
+        <module>activator</module>
+        <module>dynamic</module>
         <module>import</module>
         <module>export</module>
         <module>private</module>
