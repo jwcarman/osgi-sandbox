@@ -61,7 +61,7 @@ public class OsgiWebappDeploymentIT extends Assert {
     }
 
     protected void assertWebappDeployed(String symbolicName) {
-        final String output = executeCommand("web:list | grep '\\[Deployed'");
+        final String output = executeCommand("web:list | grep 'Deployed'");
         assertFalse("Webapp " + symbolicName + " not deployed!", isEmpty(output));
     }
 
@@ -72,17 +72,9 @@ public class OsgiWebappDeploymentIT extends Assert {
     @Configuration
     public Option[] config() {
         return options(
-                // Use Aetos...
-//                karafDistributionConfiguration()
-//                        .frameworkUrl(maven().groupId("com.savoirtech.aetos").artifactId("aetos").type("tar.gz").version("1.5.6"))
-//                        .karafVersion("2.3.6")
-//                        .name("Aetos")
-//                        .unpackDirectory(new File("target/exam")),
-
-                // Use Karaf 2.3.6...
                 karafDistributionConfiguration()
-                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("2.3.6").type("tar.gz"))
-                        .karafVersion("2.3.6")
+                        .frameworkUrl(maven().groupId("org.apache.karaf").artifactId("apache-karaf").version("3.0.3").type("tar.gz"))
+                        .karafVersion("3.0.3")
                         .useDeployFolder(false)
                         .unpackDirectory(new File("target/exam")),
 

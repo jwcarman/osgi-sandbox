@@ -10,12 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>testing</artifactId>
-    <packaging>jar</packaging>
 
     <name>OSGi Sandbox :: Webapp Deployment :: Testing</name>
 
     <properties>
-        <pax.exam.version>4.2.0</pax.exam.version>
+        <pax.exam.version>4.5.0</pax.exam.version>
     </properties>
     <dependencies>
         <dependency>
